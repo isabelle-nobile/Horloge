@@ -6,14 +6,11 @@ class Horloge:
         self.pause = False
         self.heure = localtime()
         self.heure_alarme = None
+        self.format_affichage = '%H:%M:%S'
         
     def afficher_heure(self):
         """Affiche l'heure actuelle"""
-        if self.mode_24h:
-            format_heure = '%H:%M:%S'
-        else:
-            format_heure = '%I:%M:%S %p'
-        print(strftime(format_heure, self.heure), end='\r')
+        print(strftime(self.format_affichage, self.heure), end='\r')
         
     def regler_heure(self, heures, minutes, secondes):
         """Permet de régler l'heure"""
@@ -40,12 +37,25 @@ class Horloge:
         
     def changer_format_heure(self):
         """Change le format de l'heure entre AM/PM et 24 heures"""
-        choix = input("Voulez-vous afficher l'heure en mode 24h ? (Oui/Non) ")
-        if choix.lower() == "oui":
-            self.mode_24h = True
+        self.mode_24h = not self.mode_24h
+        if self.mode_24h:
+            self.format_affichage = '%H:%M:%S'
         else:
-            self.mode_24h = False
+            self.format_affichage = '%I:%M:%S %p'
         self.afficher_heure()
+
+    def demander_format_affichage(self):
+        """Demande à l'utilisateur de choisir le format d'affichage de l'heure"""
+        choix = input("Choisissez le format d'affichage de l'heure : \n 1 - pour 24h \n 2 - pour AM/PM \n")
+        if choix == "1":
+            self.mode_24h = True
+            self.format_affichage = '%H:%M:%S'
+        elif choix == "2":
+            self.mode_24h = False
+            self.format_affichage = '%I:%M:%S %p'
+        else:
+            print("Choix invalide. Veuillez entrer 1 ou 2.")
+            self.demander_format_affichage()
 
         
     def mettre_en_pause(self):

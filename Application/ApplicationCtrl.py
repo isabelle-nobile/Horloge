@@ -1,7 +1,6 @@
-import sys
 from os import system, name
 import View.MenuView as MenuView
-from Application.HorlogeCtrl import Horloge
+from Application.test3 import Horloge
 
 class ApplicationCtrl:
     """La classe qui gère le menu principale"""
@@ -21,7 +20,8 @@ class ApplicationCtrl:
             self.horloge.regler_alarme()
         elif self.menu_starting == "mode":
             print("")
-            self.horloge.changer_format_heure()
+            self.horloge.demander_format_affichage()
+            self.start()
         elif self.menu_starting == "supprimer":
             self.clear_terminal()
             self.start()

@@ -22,23 +22,8 @@ def afficher_heure(heure, alarme):
 def regler_alarme(heure):
     return [True, heure]
 
-heure = (11, 15, 15)
+heure = (15, 15, 15)
 alarme = regler_alarme((11, 15, 20))
 print("L'heure de l'alarme est réglée sur :", alarme[1][0], ":", alarme[1][1], ":", alarme[1][2])
 
-while True:
-    choix = input("Que voulez-vous faire ? (1 : régler l'heure de l'alarme, 2 : arrêter l'alarme) ")
-    if choix == "1":
-        heures = int(input("Heures : "))
-        minutes = int(input("Minutes : "))
-        secondes = int(input("Secondes : "))
-        alarme = regler_alarme((heures, minutes, secondes))
-        print("L'heure de l'alarme a été réglée sur :", alarme[1][0], ":", alarme[1][1], ":", alarme[1][2])
-    elif choix == "2":
-        alarme[0] = False
-        print("L'alarme a été arrêtée.")
-        break
-    else:
-        print("Choix invalide.")
 
-afficher_heure(heure, alarme)
