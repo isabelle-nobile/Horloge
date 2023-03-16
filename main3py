@@ -1,0 +1,116 @@
+import time 
+from time import strftime
+
+
+class Horloge:
+    def ___init___(self):
+        self.heure =  self.get_time()
+
+    def get_time(self):
+        """retourne l'heure"""
+        heure = strftime('%H:%M:%S %p')
+        heure2 = strftime('%H:%M:%S')
+        return self.heure
+    
+    def afficher_heure(self, heure):
+        """permet de regler l'heure"""
+        heure = self.heure
+        return print(heure)
+        
+
+    def regler_alarme():
+        """regler alarme"""
+        pass
+
+    def change_mode_heure():
+        """change mode AM/PM"""
+        pass
+
+# Horloge.afficher_heure()
+
+# import time
+
+# def afficher_heure(heure, alarme):
+#     while True:
+#         heure_actuelle = time.localtime()
+#         heures, minutes, secondes = heure_actuelle.tm_hour, heure_actuelle.tm_min, heure_actuelle.tm_sec
+#         print(f"{heures:02d}:{minutes:02d}:{secondes:02d}", end="\r")
+#         time.sleep(1)
+#         if (heures, minutes, secondes) == heure:
+#             print("L'heure de l'alarme est atteinte!")
+#             alarme[0] = False
+#             break
+#         elif alarme[0]:
+#             if (heures, minutes, secondes) == alarme[1]:
+#                 print("L'alarme est déclenchée!")
+#                 for i in range(5):
+#                     print("Bip! Bip! Bip!")
+#                     time.sleep(1)
+#                 arreter = input("Voulez-vous arrêter l'alarme? (Oui/Non) ")
+#                 if arreter.lower() == "oui":
+#                     alarme[0] = False
+#                     break
+#                 else:
+#                     alarme[1] = (heures, minutes+1, secondes)
+#                     print("L'alarme est repoussée d'une minute.")
+                    
+
+# def regler_alarme(heure):
+#     return [True, heure]
+
+# heure = (11, 15, 0)
+# alarme = regler_alarme((heure[0], heure[1], heure[2]+15))
+# print("L'heure de l'alarme est réglée sur :", alarme[1][0], ":", alarme[1][1], ":", alarme[1][2])
+# afficher_heure(heure, alarme)
+
+
+import time
+
+def afficher_heure(heure, alarme):
+    while True:
+        heure_actuelle = time.localtime()
+        heures, minutes, secondes = heure_actuelle.tm_hour, heure_actuelle.tm_min, heure_actuelle.tm_sec
+        print(f"{heures:02d}:{minutes:02d}:{secondes:02d}", end="\r")
+        time.sleep(1)
+        if (heures, minutes, secondes) == heure:
+            print("L'heure de l'alarme est atteinte!")
+            alarme[0] = False
+            break
+        elif alarme[0]:
+            if (heures, minutes, secondes) == alarme[1]:
+                print("L'alarme est déclenchée!")
+                for i in range(5):
+                    print("Bip! Bip! Bip!")
+                    time.sleep(1)
+                arreter = input("Voulez-vous arrêter l'alarme? (Oui/Non) ")
+                if arreter.lower() == "oui":
+                    alarme[0] = False
+                    break
+                else:
+                    alarme[1] = (heures, minutes+1, secondes)
+                    print("L'alarme est repoussée d'une minute.")
+                    
+
+def regler_alarme(heure):
+    return [True, heure]
+
+def stop_alarme():
+    while True:
+        choix = input("Que voulez-vous faire ? (1 : régler l'heure de l'alarme, 2 : arrêter l'alarme) ")
+        if choix == "1":
+            heures = int(input("Heures : "))
+            minutes = int(input("Minutes : "))
+            secondes = int(input("Secondes : "))
+            alarme = regler_alarme((heures, minutes, secondes))
+            print("L'heure de l'alarme a été réglée sur :", alarme[1][0], ":", alarme[1][1], ":", alarme[1][2])
+        elif choix == "2":
+            alarme[0] = False
+            print("L'alarme a été arrêtée.")
+            break
+        else:
+            print("Choix invalide.")
+
+heure = (11, 15, 0)
+alarme = regler_alarme((heure[0], heure[1], heure[2]+15))
+print("L'heure de l'alarme est réglée sur :", alarme[1][0], ":", alarme[1][1], ":", alarme[1][2])
+afficher_heure(heure, alarme)
